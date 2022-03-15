@@ -215,4 +215,23 @@ function promptInsert(roleChoices) {
       .then(function (answer) {
         console.log(answer);
 
-        
+        var query = `INSERT INTO employee SET ?`
+        // logs new data information into db from client input
+        connection.query(query,
+          {
+            first_name: answer.first_name,
+            last_name: answer.last_name,
+            role_id: answer.roleId,
+            manager_id: answer.managerId,
+          },
+          function (err, res) {
+            if (err) throw err;
+  
+            console.table(res);
+            console.log(res.insertedRows + "Inserted successfully!\n");
+  
+            firstPrompt();
+          });
+      });
+  }
+  
