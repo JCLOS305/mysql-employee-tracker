@@ -9,13 +9,13 @@ const connection = mysql.createConnection({
 
 
 // Local port (or automated to 3305)
-  port: 3305,
+  port: 3306,
 
    //  username
    user: 'root',
 
    //  password
-   password: 'NewPassWordPLZ',
+   password: 'Jeancarlos1!',
    database: 'employeesDB'
 });
 

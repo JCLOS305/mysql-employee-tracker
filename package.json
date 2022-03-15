@@ -3,5 +3,24 @@
     "console.table": "^0.10.0",
     "inquirer": "^8.2.1",
     "mysql2": "^2.3.3"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "mysql-employee-tracker",
+  "description": "",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JCLOS305/mysql-employee-tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JCLOS305/mysql-employee-tracker/issues"
+  },
+  "homepage": "https://github.com/JCLOS305/mysql-employee-tracker#readme"
 }
