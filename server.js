@@ -15,7 +15,7 @@ const connection = mysql.createConnection({
    user: 'root',
 
    //  password
-   password: 'Jeancarlos1!',
+   password: '',
    database: 'employeesDB'
 });
 
@@ -48,7 +48,7 @@ function firstPrompt() {
       .then(function ({ task }) {
         switch (task) {
           case "View Employees":
-            viewEmployee();
+            viewEmployees();
             break;
   
           case "View Employees by Department":
@@ -79,7 +79,7 @@ function firstPrompt() {
   }
 
   // Employee Viewer / READall, SELECT  *  FROM
-function viewEmployee() {
+function viewEmployees() {
     console.log("Viewing employees\n");
   
     var query =
