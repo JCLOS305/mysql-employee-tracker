@@ -15,14 +15,14 @@ const connection = mysql.createConnection({
    user: 'root',
 
    //  password
-   password: '',
+   password: 'Mypassword1!',
    database: 'employeesDB'
 });
 
 connection.connect(function (err) {
    if (err) throw err;
    console.log("connected as id " + connection.threadId);
-   console.log(`Let's a-go!`)
+   console.log(`Employee Tracker!`)
 
     // initializes application
     firstPrompt();
@@ -84,12 +84,12 @@ function viewEmployees() {
   
     var query =
       `SELECT e.id, e.first_name, e.last_name, r.title, d.name AS department, r.salary, CONCAT(m.first_name, ' ', m.last_name) AS manager
-    FROM employee e
-    LEFT JOIN role r
+    FROM employees e
+    LEFT JOIN role_id r
       ON e.role_id = r.id
     LEFT JOIN department d
     ON d.id = r.department_id
-    LEFT JOIN employee m
+    LEFT JOIN employees m
       ON m.id = e.manager_id`
   
     connection.query(query, function (err, res) {
@@ -112,8 +112,8 @@ function viewEmployeeByDepartment() {
   
     var query =
       `SELECT d.id, d.name, r.salary AS budget
-    FROM employee e
-    LEFT JOIN role r
+    FROM employees e
+    LEFT JOIN role_id r
       ON e.role_id = r.id
     LEFT JOIN department d
     ON d.id = r.department_id
@@ -150,8 +150,8 @@ function viewEmployeeByDepartment() {
   
         var query =
           `SELECT e.id, e.first_name, e.last_name, r.title, d.name AS department 
-    FROM employee e
-    JOIN role r
+    FROM employees e
+    JOIN role_id r
       ON e.role_id = r.id
     JOIN department d
     ON d.id = r.department_id
@@ -175,7 +175,7 @@ function addEmployee() {
   
     var query =
       `SELECT r.id, r.title, r.salary 
-        FROM role r`
+        FROM role_id r`
   
     connection.query(query, function (err, res) {
       if (err) throw err;
@@ -207,7 +207,7 @@ function promptInsert(roleChoices) {
         },
         {
           type: "list",
-          name: "roleId",
+          name: "role_Id",
           message: "What is the employee's role?",
           choices: roleChoices
         },
@@ -215,13 +215,13 @@ function promptInsert(roleChoices) {
       .then(function (answer) {
         console.log(answer);
 
-        var query = `INSERT INTO employee SET ?`
+        var query = `INSERT INTO employees SET ?`
         // logs new data information into db from client input
         connection.query(query,
           {
             first_name: answer.first_name,
             last_name: answer.last_name,
-            role_id: answer.roleId,
+            role_id: answer.role_Id,
             manager_id: answer.managerId,
           },
           function (err, res) {
@@ -244,7 +244,7 @@ function removeEmployees() {
   
     var query =
       `SELECT e.id, e.first_name, e.last_name
-        FROM employee e`
+        FROM employees e`
   
     connection.query(query, function (err, res) {
       if (err) throw err;
@@ -274,7 +274,7 @@ function removeEmployees() {
       ])
       .then(function (answer) {
   
-        var query = `DELETE FROM employee WHERE ?`;
+        var query = `DELETE FROM employees WHERE ?`;
         // when DELETE happens the db updates information
         connection.query(query, { id: answer.employeeId }, function (err, res) {
           if (err) throw err;
@@ -298,12 +298,12 @@ function updateEmployeeRole() {
   
     var query =
       `SELECT e.id, e.first_name, e.last_name, r.title, d.name AS department, r.salary, CONCAT(m.first_name, ' ', m.last_name) AS manager
-    FROM employee e
-    JOIN role r
+    FROM employees e
+    JOIN role_id r
       ON e.role_id = r.id
     JOIN department d
     ON d.id = r.department_id
-    JOIN employee m
+    JOIN employees m
       ON m.id = e.manager_id`
   
     connection.query(query, function (err, res) {
@@ -325,7 +325,7 @@ function updateEmployeeRole() {
   
     var query =
       `SELECT r.id, r.title, r.salary 
-    FROM role r`
+    FROM role_id r`
     let roleChoices;
   
     connection.query(query, function (err, res) {
@@ -354,14 +354,14 @@ function updateEmployeeRole() {
         },
         {
           type: "list",
-          name: "roleId",
+          name: "role_Id",
           message: "Which role do you want to update?",
           choices: roleChoices
         },
       ])
       .then(function (answer) {
   
-        var query = `UPDATE employee SET role_id = ? WHERE id = ?`
+        var query = `UPDATE employees SET role_id = ? WHERE id = ?`
         // when UPDATE happens the db  information updates
         connection.query(query,
           [ answer.roleId,  
@@ -383,8 +383,8 @@ function addRole() {
 
     var query =
       `SELECT d.id, d.name, r.salary AS budget
-      FROM employee e
-      JOIN role r
+      FROM employees e
+      JOIN role_id r
       ON e.role_id = r.id
       JOIN department d
       ON d.id = r.department_id
@@ -428,7 +428,7 @@ function addRole() {
       ])
       .then(function (answer) {
   
-        var query = `INSERT INTO role SET ?`
+        var query = `INSERT INTO role_id SET ?`
   
         connection.query(query, {
           title: answer.title,
