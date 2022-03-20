@@ -321,7 +321,7 @@ function updateEmployeeRole() {
   }
   
   function roleArray(employeeChoices) {
-    console.log("Updating an role");
+    console.log("Updating a role");
   
     var query =
       `SELECT r.id, r.title, r.salary 
@@ -354,7 +354,7 @@ function updateEmployeeRole() {
         },
         {
           type: "list",
-          name: "role_Id",
+          name: "roleId",
           message: "Which role do you want to update?",
           choices: roleChoices
         },
