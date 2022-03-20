@@ -28,6 +28,8 @@ Instructions
 
 ## Usage
 
+![MYSQL](https://github.com/JCLOS305/mysql-employee-tracker/blob/main/assets/images/employee%20tracker%20mysql%20example.PNG?raw=true)
+
 
 
 ## Credits
